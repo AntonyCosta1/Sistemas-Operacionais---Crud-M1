@@ -1,0 +1,6 @@
+[21/04/2026 16:44:26] [Thread-1 (processar_requisicao)] [INSERT] ID 2 inserido com sucesso - nome: tonho
+[21/04/2026 16:45:56] [Thread-1 (processar_requisicao)] [INSERT] ID 3 inserido com sucesso - nome: viel
+[21/04/2026 16:48:27] [Thread-1 (processar_requisicao)] [DELETE] ID 1 deletado com sucesso
+[21/04/2026 16:49:00] [Thread-2 (processar_requisicao)] [UPDATE] ID 2 atualizado com sucesso - nome: antonio
+[21/04/2026 16:49:09] [Thread-3 (processar_requisicao)] [SELECT] ID: 3 - Nome: viel
+[21/04/2026 16:49:17] [Thread-4 (processar_requisicao)] [SELECT] ID: 2 - Nome: antonio
