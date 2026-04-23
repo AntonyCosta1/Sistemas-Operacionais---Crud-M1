@@ -1,12 +1,14 @@
 import threading
-from banco import Banco
 from datetime import datetime
+from banco import Banco
+
 
 class Server:
     def __init__(self):
         self.banco = Banco()
         self.threads = []
         self.lock_log = threading.Lock()
+        self.lock_resposta = threading.Lock()
 
     def registrar_log(self, mensagem):
         with self.lock_log:
@@ -15,56 +17,60 @@ class Server:
                 nome_thread = threading.current_thread().name
                 f.write(f"[{agora}] [{nome_thread}] {mensagem}\n")
 
-    def processar_requisicao(self, requisicao):
+    def processar_requisicao(self, requisicao, conn_resposta):
         operacao = requisicao.get("operacao")
-        id_registro =  requisicao.get("id")
+        id_registro = requisicao.get("id")
         nome = requisicao.get("nome")
 
         if operacao == "insert":
             if id_registro is None or nome is None or nome.strip() == "":
-                resultado = "ERRO NO INSERT, PRECISA INSERIR ID E NOME"
+                resultado = "[ERRO] INSERT precisa de id e nome"
             else:
                 resultado = self.banco.insert(id_registro, nome)
 
         elif operacao == "delete":
             if id_registro is None:
-                resultado = "ERRO NO DELTE, PRECISA INSERIR ID"
+                resultado = "[ERRO] DELETE precisa de id"
             else:
                 resultado = self.banco.delete(id_registro)
 
-        elif operacao == "select":
-            if id_registro is None:
-                resultado = "ERRO NO SELECT, PRECISA INSERIR ID"
-            else:
-                resultado = self.banco.select(id_registro)
-
         elif operacao == "update":
             if id_registro is None or nome is None or nome.strip() == "":
-                resultado = "ERRO NO update, PRECISA INSERIR ID E NOME"
+                resultado = "[ERRO] UPDATE precisa de id e nome"
             else:
                 resultado = self.banco.update(id_registro, nome)
+
+        elif operacao == "select":
+            if id_registro is None:
+                resultado = "[ERRO] SELECT precisa de id"
+            else:
+                resultado = self.banco.select(id_registro)
 
         else:
             resultado = "[ERRO] Operação inválida"
 
-        print(resultado)
         self.registrar_log(resultado)
 
-    def exec(self, conn):
-        print("Servidor iniciado...")
+        with self.lock_resposta:
+            conn_resposta.send(resultado)
+
+    def exec(self, conn_requisicao, conn_resposta):
+        self.registrar_log("Servidor iniciado")
 
         while True:
-            req = conn.recv()
+            req = conn_requisicao.recv()
 
             if req == "sair":
                 break
 
-            t = threading.Thread(target=self.processar_requisicao, args=(req,))
+            t = threading.Thread(
+                target=self.processar_requisicao,
+                args=(req, conn_resposta)
+            )
             t.start()
             self.threads.append(t)
 
         for t in self.threads:
             t.join()
 
-        self.registrar_log("Servidor")
-        print("Servidor encerrado.")
+        self.registrar_log("Servidor encerrado")

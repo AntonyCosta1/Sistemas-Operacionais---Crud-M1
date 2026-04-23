@@ -1,12 +1,23 @@
 from multiprocessing import Process, Pipe
-from cliente import requisicao
+from cliente import Requisicao
 from server import Server
 
-def iniciar_servidor(conn):
-    servidor = Server()
-    servidor.exec(conn)
 
-def menu_cliente(conn):
+def iniciar_servidor(conn_req, conn_resp):
+    servidor = Server()
+    servidor.exec(conn_req, conn_resp)
+
+
+def mostrar_banco():
+    try:
+        with open("banco.json", "r", encoding="utf-8") as f:
+            print("\nConteúdo atual do banco.json:")
+            print(f.read())
+    except FileNotFoundError:
+        print("banco.json ainda não existe.")
+
+
+def menu_cliente(conn_req, conn_resp):
     while True:
         print("\nMenu")
         print("1 - insert")
@@ -16,67 +27,70 @@ def menu_cliente(conn):
         print("5 - mostrar o banco")
         print("7 - sair")
 
-        op = input("Escolha uma opção: \n").strip()
+        op = input("Escolha uma opção: ").strip()
 
         if op == "1":
             try:
-                id = int(input("digite o id: "))
-                nome = input("digite o nome: ")
-                req = requisicao("insert", id, nome)
-                conn.send(req.to_dict())
+                id_registro = int(input("digite o id: "))
+                nome = input("digite o nome: ").strip()
+                req = Requisicao("insert", id_registro, nome)
+                conn_req.send(req.to_dict())
+                print(conn_resp.recv())
             except ValueError:
-                print("ID invalido, digite um numero inteiro!")
+                print("ID inválido.")
 
-        elif op =="2":
+        elif op == "2":
             try:
-                id = int(input("digite o id: "))
-                
-                req = requisicao("delete", id)
-                conn.send(req.to_dict())
+                id_registro = int(input("digite o id: "))
+                req = Requisicao("delete", id_registro)
+                conn_req.send(req.to_dict())
+                print(conn_resp.recv())
             except ValueError:
-                print("ID invalido, digite um numero inteiro!")
+                print("ID inválido.")
 
-        elif op =="3":
+        elif op == "3":
             try:
-                id = int(input("digite o id: "))
-                nome = input("digite o novo nome: ")
-                req = requisicao("update", id, nome)
-                conn.send(req.to_dict())
+                id_registro = int(input("digite o id: "))
+                nome = input("digite o novo nome: ").strip()
+                req = Requisicao("update", id_registro, nome)
+                conn_req.send(req.to_dict())
+                print(conn_resp.recv())
             except ValueError:
-                print("ID invalido, digite um numero inteiro!")
+                print("ID inválido.")
 
-        elif op =="4":
+        elif op == "4":
             try:
-                id = int(input("digite o id: "))
-                req = requisicao("select", id)
-                conn.send(req.to_dict())
+                id_registro = int(input("digite o id: "))
+                req = Requisicao("select", id_registro)
+                conn_req.send(req.to_dict())
+                print(conn_resp.recv())
             except ValueError:
-                print("ID invalido, digite um numero inteiro!")
+                print("ID inválido.")
 
         elif op == "5":
-            try:
-                with open("banco.json", "r", encoding="utf-8") as f:
-                    print("Segue conteudo:")
-                    print(f.read())
-            except FileNotFoundError:
-                    print("Banco não existe")
+            mostrar_banco()
 
-        elif op =="7":
-            conn.send("sair")
-            print("Encerrando servidor")
+        elif op == "7":
+            conn_req.send("sair")
+            print("Encerrando cliente...")
             break
 
         else:
-            print("Opção invalida, tente denovo")
+            print("Opção inválida.")
 
 
 if __name__ == "__main__":
-    conn_cliente, conn_servidor = Pipe()
+    conn_req_cliente, conn_req_servidor = Pipe()
+    conn_resp_cliente, conn_resp_servidor = Pipe()
 
-    processo_servidor = Process(target=iniciar_servidor, args=(conn_servidor,))
+    processo_servidor = Process(
+        target=iniciar_servidor,
+        args=(conn_req_servidor, conn_resp_servidor)
+    )
     processo_servidor.start()
 
-    menu_cliente(conn_cliente)
-    processo_servidor.join()
+    print("Servidor iniciado...")
+    menu_cliente(conn_req_cliente, conn_resp_cliente)
 
+    processo_servidor.join()
     print("Cliente encerrado.")

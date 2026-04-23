@@ -4,3 +4,8 @@
 [21/04/2026 16:49:00] [Thread-2 (processar_requisicao)] [UPDATE] ID 2 atualizado com sucesso - nome: antonio
 [21/04/2026 16:49:09] [Thread-3 (processar_requisicao)] [SELECT] ID: 3 - Nome: viel
 [21/04/2026 16:49:17] [Thread-4 (processar_requisicao)] [SELECT] ID: 2 - Nome: antonio
+[23/04/2026 15:49:12] [Thread-1 (processar_requisicao)] [INSERT] ID 4 inserido com sucesso - nome: teste
+[23/04/2026 15:49:23] [Thread-2 (processar_requisicao)] [SELECT] ID: 4 - Nome: teste
+[23/04/2026 16:05:25] [MainThread] Servidor iniciado
+[23/04/2026 16:05:36] [Thread-1 (processar_requisicao)] [INSERT] ID 5 inserido com sucesso - nome: novo teste
+[23/04/2026 16:05:40] [Thread-2 (processar_requisicao)] [SELECT] ID: 5 - Nome: novo teste
