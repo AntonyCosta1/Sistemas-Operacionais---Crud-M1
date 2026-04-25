@@ -9,3 +9,13 @@
 [23/04/2026 16:05:25] [MainThread] Servidor iniciado
 [23/04/2026 16:05:36] [Thread-1 (processar_requisicao)] [INSERT] ID 5 inserido com sucesso - nome: novo teste
 [23/04/2026 16:05:40] [Thread-2 (processar_requisicao)] [SELECT] ID: 5 - Nome: novo teste
+[23/04/2026 18:20:23] [MainThread] Servidor iniciado
+[23/04/2026 18:20:30] [Thread-1 (processar_requisicao)] [SELECT] ID: 2 - Nome: antonio
+[24/04/2026 11:04:37] [MainThread] Servidor iniciado
+[24/04/2026 11:05:42] [MainThread] Servidor iniciado
+[24/04/2026 11:10:24] [MainThread] Servidor iniciado
+[24/04/2026 11:10:45] [Thread-1 (processar_requisicao)] [UPDATE] ID 2 atualizado com sucesso - nome: bernardo
+[25/04/2026 11:03:49] [MainThread] Servidor iniciado
+[25/04/2026 11:04:00] [Thread-1 (processar_requisicao)] [INSERT] ID 1 inserido com sucesso - nome: isabella
+[25/04/2026 11:04:08] [Thread-2 (processar_requisicao)] [SELECT] ID: 1 - Nome: isabella
+[25/04/2026 11:06:05] [MainThread] Servidor encerrado
