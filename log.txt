@@ -19,3 +19,32 @@
 [25/04/2026 11:04:00] [Thread-1 (processar_requisicao)] [INSERT] ID 1 inserido com sucesso - nome: isabella
 [25/04/2026 11:04:08] [Thread-2 (processar_requisicao)] [SELECT] ID: 1 - Nome: isabella
 [25/04/2026 11:06:05] [MainThread] Servidor encerrado
+[27/04/2026 18:23:07] [MainThread] Servidor iniciado
+[27/04/2026 18:23:26] [Thread-1 (processar_requisicao)] [INSERT] ID 6 inserido com sucesso - nome: duda
+[27/04/2026 18:23:37] [Thread-2 (processar_requisicao)] [INSERT] ID 7 inserido com sucesso - nome: joao
+[27/04/2026 18:23:54] [Thread-3 (processar_requisicao)] [INSERT] ID 8 inserido com sucesso - nome: matheus
+[27/04/2026 18:24:03] [Thread-4 (processar_requisicao)] [SELECT] ID: 1 - Nome: isabella
+[27/04/2026 18:24:29] [Thread-5 (processar_requisicao)] [DELETE] ID 3 deletado com sucesso
+[27/04/2026 18:24:36] [Thread-6 (processar_requisicao)] [INSERT] ID 3 inserido com sucesso - nome: viel 2
+[27/04/2026 23:01:50] [MainThread] Servidor iniciado
+[27/04/2026 23:01:50] [Thread-1 (processar_requisicao)] [INSERT] O id 1 já está no banco
+[27/04/2026 23:01:50] [Thread-2 (processar_requisicao)] [INSERT] O id 2 já está no banco
+[27/04/2026 23:01:50] [Thread-3 (processar_requisicao)] [INSERT] O id 3 já está no banco
+[27/04/2026 23:01:50] [Thread-4 (processar_requisicao)] [INSERT] O id 4 já está no banco
+[27/04/2026 23:01:50] [Thread-5 (processar_requisicao)] [INSERT] O id 5 já está no banco
+[27/04/2026 23:01:50] [Thread-6 (processar_requisicao)] [INSERT] O id 6 já está no banco
+[27/04/2026 23:01:50] [Thread-7 (processar_requisicao)] [INSERT] O id 7 já está no banco
+[27/04/2026 23:01:50] [Thread-8 (processar_requisicao)] [INSERT] O id 8 já está no banco
+[27/04/2026 23:01:50] [Thread-9 (processar_requisicao)] [INSERT] ID 9 inserido com sucesso - nome: Nome 9
+[27/04/2026 23:01:50] [Thread-10 (processar_requisicao)] [INSERT] ID 10 inserido com sucesso - nome: Nome 10
+[27/04/2026 23:01:50] [Thread-11 (processar_requisicao)] [INSERT] ID 11 inserido com sucesso - nome: Nome 11
+[27/04/2026 23:01:50] [Thread-12 (processar_requisicao)] [INSERT] ID 12 inserido com sucesso - nome: Nome 12
+[27/04/2026 23:01:50] [Thread-13 (processar_requisicao)] [INSERT] ID 13 inserido com sucesso - nome: Nome 13
+[27/04/2026 23:01:50] [Thread-14 (processar_requisicao)] [INSERT] ID 14 inserido com sucesso - nome: Nome 14
+[27/04/2026 23:01:50] [Thread-15 (processar_requisicao)] [INSERT] ID 15 inserido com sucesso - nome: Nome 15
+[27/04/2026 23:01:50] [Thread-16 (processar_requisicao)] [INSERT] ID 16 inserido com sucesso - nome: Nome 16
+[27/04/2026 23:01:50] [Thread-17 (processar_requisicao)] [INSERT] ID 17 inserido com sucesso - nome: Nome 17
+[27/04/2026 23:01:50] [Thread-18 (processar_requisicao)] [INSERT] ID 18 inserido com sucesso - nome: Nome 18
+[27/04/2026 23:01:50] [Thread-19 (processar_requisicao)] [INSERT] ID 19 inserido com sucesso - nome: Nome 19
+[27/04/2026 23:01:50] [Thread-20 (processar_requisicao)] [INSERT] ID 20 inserido com sucesso - nome: Nome 20
+[27/04/2026 23:01:50] [MainThread] Servidor encerrado
